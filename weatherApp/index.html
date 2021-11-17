@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- CSS only -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+    <!-- JavaScript Bundle with Popper -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.0/font/bootstrap-icons.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- nav : select and search -->
+    <nav class="navbar navbar-light bg-light">
+      <div class="container-fluid justify-content-center">
+        <h1>The Weather App</h1>
+      </div>
+
+      <div class="container-fluid justify-content-center">
+        <div class="col-md-8 col-lg-8 col-sm-12 col-12">
+          <select
+            id="select"
+            class="form-select"
+            aria-label="Default select example"
+          >
+            <option selected>Select country</option>
+          </select>
+        </div>
+        <button
+          type="button"
+          class="btn btn-primary col-lg-1 col-sm-8 col-12"
+          onclick="getSelectedCountry();clearCard();"
+        >
+          Search
+        </button>
+      </div>
+    </nav>
+    <!-- main body -->
+    <div
+      class="container-lg d-flex flex-wrap justify-content-between"
+      id="mainContainer"
+    >
+      <div class="row col-12 col-sm-12 col-md-12">
+        <div class="col-12 col-sm-12 col-md-7 col-lg-7">
+          <div class="card mb-3" id="countryCard">
+            <img
+              id="cardImage"
+              src="musk.jpg"
+              class="card-img-top"
+              style="max-height: 350px"
+              alt="..."
+            />
+            <div class="card-body">
+              <h5 id="cardName" class="card-title">Country Name</h5>
+              <p class="card-text">
+                Native Name: <span id="cardNative"></span>
+              </p>
+              <p class="card-text">Region: <span id="cardRegion"></span></p>
+              <p class="card-text">Capital: <span id="cardCapital"></span></p>
+              <p class="card-text">
+                Population: <span id="cardPopulation"></span>
+              </p>
+              <p class="card-text">Languages: <span id="cardLang"></span></p>
+              <p class="card-text">Time Zone: <span id="cardTz"> </span></p>
+              <div
+                style="background-color: rgb(195, 230, 236)"
+                class="p-3 rounded"
+              >
+                <h2 style="color: rgb(3, 3, 2)">
+                  <i class="bi bi-telephone"></i>Calling Code :
+                  <span id="cardCcode">00</span>
+                </h2>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="col-12 col-sm-12 col-md-5 col-lg-5"
+          style="height: fit-content"
+        >
+          <div class="card">
+            <div class="card-body">
+              <h5
+                class="card-title text-center bg-dark text-light p-3 rounded"
+                id="weatherTitle"
+              >
+                Capital Weather Report
+              </h5>
+              <div
+                class="
+                  d-flex
+                  flex-column
+                  align-items-center
+                  justify-content-center
+                  bg-light
+                "
+              >
+                <img
+                  id="weatherIcon"
+                  style="width: 200px; height: 200px"
+                  src="icon.png"
+                />
+                <p class="card-text text-primary">
+                  <span id="weatherDescription">Weather Description</span>
+                </p>
+              </div>
+
+              <p class="card-text">
+                Temprature: <span id="weatherTemp"></span>
+              </p>
+              <p class="card-text">
+                Wind Speed: <span id="weatherWind"></span>
+              </p>
+              <p class="card-text">Humidity: <span id="weatherHumid"></span></p>
+              <p class="card-text">Visibility: <span id="weatherVis"></span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="container-lg d-flex flex-wrap justify-content-between"
+      id="mainContainer"
+    >
+      <div class="row col-12 col-sm-12 col-md-12">
+        <div class="card">
+          <div class="card-body">
+            <h3>My Google Maps Demo</h3>
+            <div id="map" class=""></div>
+          </div>
+        </div>
+        
+        <!--The div element for the map -->
+      </div>
+    </div>
+    <!-- Modal -->
+    <div
+      class="modal fade"
+      id="gameModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">...</div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Close
+            </button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="main.js"></script>
+    <script
+      id="map"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAuijsPs5C9BCDxLV3Mgf6cr1cTiHs7xo8&callback=initMap&libraries=&v=weekly"
+      async
+    ></script>
+  </body>
+</html>
